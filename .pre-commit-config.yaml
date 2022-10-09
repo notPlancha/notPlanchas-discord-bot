@@ -1,0 +1,17 @@
+repos:
+-   repo: https://github.com/psf/black
+    rev: 21.12b0
+    hooks:
+    -   id: black
+        language_version: python3.10
+        args: [--target-version=py310]
+-   repo: local
+    hooks:
+        - id: encrypt
+          name: Encrypt
+          entry: python
+          language: python
+          types: [file]
+          args:
+            - config/encrypt.py
+            - secrets.py
