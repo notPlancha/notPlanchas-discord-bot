@@ -59,14 +59,14 @@ addGameButton = interactions.Button(
 )
 removeGameButton = interactions.Button(
     label="Remove game",
-    style=interactions.ButtonStyle.PRIMARY,
+    style=interactions.ButtonStyle.SECONDARY,
     custom_id="remove_game",
 )
 addAndRemoveRow = interactions.ActionRow(
     components=[removeGameButton, addGameButton]
 )
 
-selectMenu = interactions.SelectMenu(
+selectGame = interactions.SelectMenu(
     custom_id="select_menu",
     options=[
         interactions.SelectOption(
@@ -103,6 +103,10 @@ selectMenu = interactions.SelectMenu(
 )
 
 
+gameChoices = [
+    interactions.Choice() #TODO
+]
+
 # endregion
 
 @bot.command(name="get-pinged",
@@ -111,28 +115,18 @@ async def roleMain(ctx):
     pass
 
 
-@roleMain.subcommand(name="start", description="choose a channel to put the message in")
-async def roleStart(ctx):
-    channels = [channel for guild in bot.guilds for channel in guild.channels if channel.type == ChannelType.GUILD_TEXT]
-    await ctx.send("Choose a channel to put the message in", components=[
+@roleMain.subcommand(name="gui", description="choose a channel to put the message in")
+@interactions.option()
+async def roleStart(ctx, ephemeral:bool = True):
+    # channels = [channel for guild in bot.guilds for channel in guild.channels if channel.type == ChannelType.GUILD_TEXT]
+    await ctx.send("Choose a game", components=[
         interactions.ActionRow(
-            components=[
-                interactions.SelectMenu(
-                    custom_id="channel_select",
-                    options=[
-                        interactions.SelectOption(
-                            label=channel.name,
-                            value=str(channel.id),
-                            default=False,
-                        ) for i, channel in enumerate(channels) if channel.name == "dev"
-                    ],
-                )
-            ]
-        )
-    ])
-    await ctx.defer()
+            components=[selectGame],
+        ),
+        selectGame
+    ] ,ephemeral= ephemeral)
 
-
+@bot.component()
 
 @roleMain.subcommand(name="add-role", description="adds role chosen")
 @interactions.option()

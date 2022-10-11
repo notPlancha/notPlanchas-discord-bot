@@ -1,6 +1,5 @@
-import sys
-import os
 import getpass
+import sys
 from pyAesCrypt import encryptFile as encrypt
 
 # args should be 'file password'
