@@ -1,10 +1,16 @@
 import interactions
-from interactions import ClientPresence, ChannelType
+from interactions import ClientPresence, ChannelType, Image
 
 from config.secrets import token
 
 bot = interactions.Client(token=token)
 
+# ideia do que fazer
+# prmeira mensagem apenas com os dois botoes, para tirar ou por
+# ou uma invocacao ephimeral dessa merda, mas um default sem esse ephm
+# o resto e ephemeral
+# dps disso o bot manda um novo select menu para escolher
+# e dps apply
 
 # region debug category
 @bot.command(name="debug", )
@@ -39,6 +45,18 @@ async def textCommand(ctx: interactions.CommandContext, text: str, text2: str):
 
 # endregion
 
+# region change username or avatar
+@debug.subcommand(name="change-user", description="change the username or avatar of the bot")
+@interactions.option(name="username", description="the new username of the bot")
+@interactions.option(name="avatar", description="the link to the new avatar of the bot")
+async def changeUser(ctx: interactions.CommandContext, username: str = None, avatar: str = None):
+    if username:
+        await bot.modify(username=username)
+    if avatar:
+        await bot.modify(avatar=Image(avatar))
+
+#endregion
+
 # endregion
 
 # region help category
@@ -67,7 +85,7 @@ addAndRemoveRow = interactions.ActionRow(
 )
 
 selectGame = interactions.SelectMenu(
-    custom_id="select_menu",
+    custom_id="select_game",
     options=[
         interactions.SelectOption(
             label="League of Legends",
@@ -123,14 +141,20 @@ async def roleStart(ctx, ephemeral:bool = True):
         interactions.ActionRow(
             components=[selectGame],
         ),
-        selectGame
+        addAndRemoveRow
     ] ,ephemeral= ephemeral)
 
-@bot.component()
+@bot.component('add_game')
+async def addGame(ctx: interactions.ComponentContext):
+    # get the info from the select menu
+    pass
+
+
+
 
 @roleMain.subcommand(name="add-role", description="adds role chosen")
 @interactions.option()
-async def roleAdd(ctx, role: str):
+async def roleAdd(ctx: interactions.CommandContext, role: str):
     match role:
         case "league_of_legends":
             await ctx.send("league_of_legends")
@@ -146,6 +170,7 @@ async def roleAdd(ctx, role: str):
             await ctx.send("free_games")
         case _:
             await ctx.send("no role found")
+
 
 
 # endregion
