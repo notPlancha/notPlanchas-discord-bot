@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "pythonproject"
+name = "notPlancha's discord bot"
 version = "0.1.0"
-description = ""
+description = "notPlancha's discord bot"
 authors = ["notPlancha <andre.plancha@hotmail.com>"]
 
 [tool.poetry.dependencies]
@@ -9,7 +9,9 @@ python = "^3.10"
 pyAesCrypt = "^6.0.0"
 pre-commit = "^2.20.0"
 black = "^22.10.0"
-py-cord = {git = "https://github.com/Pycord-Development/pycord"}
+"discord.py-message-components" = {git = "https://github.com/mccoderpy/discord.py-message-components.git", rev = "developer"}
+"discord.py" = "^2.0.1"
+discord-py-interactions = "^4.3.3"
 
 [tool.poetry.dev-dependencies]
 

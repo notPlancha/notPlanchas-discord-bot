@@ -92,6 +92,14 @@ optional = false
 python-versions = ">=3.6.1"
 
 [[package]]
+name = "chardet"
+version = "5.0.0"
+description = "Universal encoding detector for Python 3"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "charset-normalizer"
 version = "2.1.1"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
@@ -139,6 +147,69 @@ pep8test = ["black", "flake8", "flake8-import-order", "pep8-naming"]
 sdist = ["setuptools-rust (>=0.11.4)"]
 ssh = ["bcrypt (>=3.1.5)"]
 test = ["pytest (>=6.2.0)", "pytest-benchmark", "pytest-cov", "pytest-subtests", "pytest-xdist", "pretend", "iso8601", "pytz", "hypothesis (>=1.11.4,!=3.79.2)"]
+
+[[package]]
+name = "discord-py-interactions"
+version = "4.3.3"
+description = "Easy, simple, scalable and modular: a Python API wrapper for interactions."
+category = "main"
+optional = false
+python-versions = ">=3.8.6"
+
+[package.dependencies]
+aiohttp = ">=3.8.1"
+attrs = ">=21.3.0"
+
+[package.extras]
+dev = ["black", "flake8", "isort", "pre-commit", "enum-tools", "furo", "sphinx", "sphinx-copybutton", "sphinx-hoverxref"]
+lint = ["black", "flake8", "isort", "pre-commit"]
+readthedocs = ["enum-tools", "furo", "sphinx", "sphinx-copybutton", "sphinx-hoverxref"]
+
+[[package]]
+name = "discord.py"
+version = "2.0.1"
+description = "A Python wrapper for the Discord API"
+category = "main"
+optional = false
+python-versions = ">=3.8.0"
+
+[package.dependencies]
+aiohttp = ">=3.7.4,<4"
+
+[package.extras]
+voice = ["PyNaCl (>=1.3.0,<1.6)"]
+test = ["typing-extensions (>=4.3,<5)", "pytest-mock", "pytest-cov", "pytest-asyncio", "pytest", "coverage"]
+speed = ["cchardet (==2.1.7)", "brotli", "aiodns (>=1.1)", "orjson (>=3.5.4)"]
+docs = ["typing-extensions (>=4.3,<5)", "sphinxcontrib-websupport", "sphinxcontrib-trio (==1.1.2)", "sphinx (==4.4.0)"]
+
+[[package]]
+name = "discord.py-message-components"
+version = "2.0a294+gfb291a6"
+description = "A \"fork\" of discord.py library made by Rapptz with implementation of the Discord-Message-Components & other features by mccoderpy"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+develop = false
+
+[package.dependencies]
+aiohttp = "*"
+async-timeout = "*"
+attrs = "*"
+chardet = "*"
+idna = "*"
+multidict = "*"
+typing-extensions = "*"
+yarl = "*"
+
+[package.extras]
+docs = ["sphinx (==3.0.3)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport"]
+voice = ["PyNaCl (>=1.3.0,<1.5)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/mccoderpy/discord.py-message-components.git"
+reference = "developer"
+resolved_reference = "fb291a633a57ce25ac8cca2ab5c9b21d9120db5b"
 
 [[package]]
 name = "distlib"
@@ -248,29 +319,6 @@ toml = "*"
 virtualenv = ">=20.0.8"
 
 [[package]]
-name = "py-cord"
-version = "2.2.3.dev3+g587874c1"
-description = "A Python wrapper for the Discord API"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-develop = false
-
-[package.dependencies]
-aiohttp = ">=3.6.0,<3.9.0"
-
-[package.extras]
-docs = ["sphinx (==4.5.0)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport", "myst-parser"]
-speed = ["orjson (>=3.5.4)", "aiodns (>=1.1)", "brotlipy", "cchardet"]
-voice = ["PyNaCl (>=1.3.0,<1.6)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/Pycord-Development/pycord"
-reference = "master"
-resolved_reference = "587874c1992ee2d739018543d4ec78a4367de203"
-
-[[package]]
 name = "pyaescrypt"
 version = "6.0.0"
 description = "Encrypt and decrypt files and streams in AES Crypt format (version 2)"
@@ -314,6 +362,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "typing-extensions"
+version = "4.4.0"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "virtualenv"
 version = "20.16.5"
 description = "Virtual Python Environment builder"
@@ -345,7 +401,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "ea2fc13c2f6ae31e4411a34087a06f90f89f96454c944c089df1cdb5add440ff"
+content-hash = "7a7d90df34f0f351b87426a32573cc8450b629b5fc93cc03f932b221ecce1f8d"
 
 [metadata.files]
 aiohttp = [
@@ -542,6 +598,10 @@ cfgv = [
     {file = "cfgv-3.3.1-py2.py3-none-any.whl", hash = "sha256:c6a0883f3917a037485059700b9e75da2464e6c27051014ad85ba6aaa5884426"},
     {file = "cfgv-3.3.1.tar.gz", hash = "sha256:f5a830efb9ce7a445376bb66ec94c638a9787422f96264c98edc6bdeed8ab736"},
 ]
+chardet = [
+    {file = "chardet-5.0.0-py3-none-any.whl", hash = "sha256:d3e64f022d254183001eccc5db4040520c0f23b1a3f33d6413e099eb7f126557"},
+    {file = "chardet-5.0.0.tar.gz", hash = "sha256:0368df2bfd78b5fc20572bb4e9bb7fb53e2c094f60ae9993339e8671d0afb8aa"},
+]
 charset-normalizer = [
     {file = "charset-normalizer-2.1.1.tar.gz", hash = "sha256:5a3d016c7c547f69d6f81fb0db9449ce888b418b5b9952cc5e6e66843e9dd845"},
     {file = "charset_normalizer-2.1.1-py3-none-any.whl", hash = "sha256:83e9a75d1911279afd89352c68b45348559d1fc0506b054b346651b5e7fee29f"},
@@ -582,6 +642,15 @@ cryptography = [
     {file = "cryptography-38.0.1-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:52e7bee800ec869b4031093875279f1ff2ed12c1e2f74923e8f49c916afd1d3b"},
     {file = "cryptography-38.0.1.tar.gz", hash = "sha256:1db3d807a14931fa317f96435695d9ec386be7b84b618cc61cfa5d08b0ae33d7"},
 ]
+discord-py-interactions = [
+    {file = "discord-py-interactions-4.3.3.tar.gz", hash = "sha256:ab567c25947745ea168997e989515ce585e6d1c1c4e232ab0cc8afdd362a3b50"},
+    {file = "discord_py_interactions-4.3.3-py3-none-any.whl", hash = "sha256:74e816ab736ebb08d61020f00ff504831bb7eb333978b61b3a94b3f451eb6933"},
+]
+"discord.py" = [
+    {file = "discord.py-2.0.1-py3-none-any.whl", hash = "sha256:aeb186348bf011708b085b2715cf92bbb72c692eb4f59c4c0b488130cc4c4b7e"},
+    {file = "discord.py-2.0.1.tar.gz", hash = "sha256:309146476e986cb8faf038cd5d604d4b3834ef15c2d34df697ce5064bf5cd779"},
+]
+"discord.py-message-components" = []
 distlib = [
     {file = "distlib-0.3.6-py2.py3-none-any.whl", hash = "sha256:f35c4b692542ca110de7ef0bea44d73981caeb34ca0b9b6b2e6d7790dda8f80e"},
     {file = "distlib-0.3.6.tar.gz", hash = "sha256:14bad2d9b04d3a36127ac97f30b12a19268f211063d8f8ee4f47108896e11b46"},
@@ -740,7 +809,6 @@ pre-commit = [
     {file = "pre_commit-2.20.0-py2.py3-none-any.whl", hash = "sha256:51a5ba7c480ae8072ecdb6933df22d2f812dc897d5fe848778116129a681aac7"},
     {file = "pre_commit-2.20.0.tar.gz", hash = "sha256:a978dac7bc9ec0bcee55c18a277d553b0f419d259dadb4b9418ff2d00eb43959"},
 ]
-py-cord = []
 pyaescrypt = [
     {file = "pyAesCrypt-6.0.0-py3-none-any.whl", hash = "sha256:cfbc05f0bac12d9f0446bb9c824648786cfa5c1ee7bf73674e396bd0749e2963"},
     {file = "pyAesCrypt-6.0.0.tar.gz", hash = "sha256:a26731960fb24b80bd3c77dbff781cab20e77715906699837f73c9fcb2f44a57"},
@@ -798,6 +866,10 @@ toml = [
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+typing-extensions = [
+    {file = "typing_extensions-4.4.0-py3-none-any.whl", hash = "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"},
+    {file = "typing_extensions-4.4.0.tar.gz", hash = "sha256:1511434bb92bf8dd198c12b1cc812e800d4181cfcb867674e0f8279cc93087aa"},
 ]
 virtualenv = [
     {file = "virtualenv-20.16.5-py3-none-any.whl", hash = "sha256:d07dfc5df5e4e0dbc92862350ad87a36ed505b978f6c39609dc489eadd5b0d27"},
