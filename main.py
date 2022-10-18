@@ -67,7 +67,7 @@ async def help(ctx):
 
 # endregion
 
-# region role self choose
+# region role self choose category
 
 # region components
 addGameButton = interactions.Button(
@@ -84,9 +84,7 @@ addAndRemoveRow = interactions.ActionRow(
     components=[removeGameButton, addGameButton]
 )
 
-selectGame = interactions.SelectMenu(
-    custom_id="select_game",
-    options=[
+options = [
         interactions.SelectOption(
             label="League of Legends",
             value="league_of_legends",
@@ -117,8 +115,7 @@ selectGame = interactions.SelectMenu(
             value="free_games",
             default=False,
         ),
-    ],
-)
+    ]
 
 
 gameChoices = [
@@ -132,30 +129,32 @@ gameChoices = [
 async def roleMain(ctx):
     pass
 
-
-@roleMain.subcommand(name="gui", description="choose a channel to put the message in")
+@roleMain.subcommand(name="gui", description="gui for choosing games")
 @interactions.option()
 async def roleStart(ctx, ephemeral:bool = True):
     # channels = [channel for guild in bot.guilds for channel in guild.channels if channel.type == ChannelType.GUILD_TEXT]
-    await ctx.send("Choose a game", components=[
-        interactions.ActionRow(
-            components=[selectGame],
-        ),
+    await ctx.send("Add or remove role?", components=[
         addAndRemoveRow
     ] ,ephemeral= ephemeral)
 
+# region addRole
 @bot.component('add_game')
 async def addGame(ctx: interactions.ComponentContext):
-    # get the info from the select menu
-    pass
+    # get the info of the clicker (roles not in), and send scroller (ephemeral)
+    selectGameAdder = interactions.SelectMenu(
+        custom_id="select_game_add",
+        options=options, #TODO change depending on author info
+    )
+    await ctx.send(ctx.author.name + ", Select a game to add", components=[
+        interactions.ActionRow(
+         components=[selectGameAdder],
+        ),
+    ], ephemeral=True)
 
-
-
-
-@roleMain.subcommand(name="add-role", description="adds role chosen")
-@interactions.option()
-async def roleAdd(ctx: interactions.CommandContext, role: str):
-    match role:
+@bot.component('select_game_add')
+async def selectGameChoosenAdd(ctx: interactions.ComponentContext, valueSelected : list[str]):
+    match valueSelected[0]:
+        # TODO add roles
         case "league_of_legends":
             await ctx.send("league_of_legends")
         case "overwatch":
@@ -171,6 +170,41 @@ async def roleAdd(ctx: interactions.CommandContext, role: str):
         case _:
             await ctx.send("no role found")
 
+#endregion
+
+#region removeRole
+@bot.component('remove_game')
+async def removeGame(ctx: interactions.ComponentContext):
+    # get the info of the clicker (roles in), and send scroller (ephemeral)
+    selectGameRemover = interactions.SelectMenu(
+        custom_id="select_game_remove",
+        options=options, #TODO change depending on author info
+    )
+    await ctx.send(ctx.author.name + ", Select a game to remove", components=[
+        interactions.ActionRow(
+         components=[selectGameRemover],
+        ),
+    ], ephemeral=True)
+
+@bot.component('select_game_remove')
+async def selectGameChoosenRemove(ctx: interactions.ComponentContext, valueSelected : list[str]):
+    match valueSelected[0]:
+        # TODO remove roles
+        case "league_of_legends":
+            await ctx.send("league_of_legends")
+        case "overwatch":
+            await ctx.send("overwatch")
+        case "valorant":
+            await ctx.send("valorant")
+        case "minecraft":
+            await ctx.send("minecraft")
+        case "among_us":
+            await ctx.send("among_us")
+        case "free_games":
+            await ctx.send("free_games")
+        case _:
+            await ctx.send("no role found")
+#endregion
 
 
 # endregion
